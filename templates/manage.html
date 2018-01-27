@@ -1,0 +1,33 @@
+$def with (posts)
+$var title: Content Management
+
+<manage>
+  <a href="/manage/create">New article</a>
+  <table>
+    $for post in posts:
+    $ id = post['id']
+    $ hidden = post['hidden']
+    <tr>
+      <td><a href="/view/$id">$post['title']</a></td>
+      <td>
+	<form action="manage/edit/$id" method="get">
+	  <input type="submit" value="Edit"/>
+	</form>
+      </td>
+      <td>
+	$if hidden==0:
+            $ act='hide'
+            $ text='Hide'
+        $else:
+            $ act='show'
+            $ text='Show'
+        <form action="manage/$act/$id" method="post">
+            <input type="submit" value="$text"/>
+        </form>
+      </td>
+    </tr>
+  </table>
+</manage>
+
+
+

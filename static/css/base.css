@@ -1,0 +1,12 @@
+body{border-top:3em solid #4e4e4e;margin:0;padding:0;}
+
+/* LAYOUT */
+#container{margin:0 auto;min-width:500px;width:55em;font-size:100%;}
+
+
+/* TOP NAV BAR */
+#nav {display:block; position: absolute; top: 0;margin:0.5em 0 0.5em; padding:0;
+  color: #eee; word-spacing: 0.3em;
+  font:bold 138.5% Kreon,Cambria,Georgia,serif;}
+#nav a{color: inherit; border:0;font-size:inherit;text-decoration:none}
+#nav a:hover{color: #fff; border-bottom-color:#086E6E;text-decoration:none}

@@ -1,0 +1,28 @@
+$def with (content)
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    $if hasattr(content,'title'):
+        <title>$content.title @Heli Space</title>
+    $else:
+	<title>Heli Space</title>
+<link rel="stylesheet" href="/static/css/base.css" /> 
+    
+    <meta name="keywords" content="helicopter, blog, heli" /> 
+    <meta name="description" content="Justin's helicopter blog." />
+    <meta name="author" content="Justin Zhu" />
+    <meta name="copyright" content="Justin Zhu" />
+
+    <meta name="Description" content="HeliSpace, a space of helicopter, flight safty." />
+  </head>
+  <body>
+    <div id="container">
+      <nav id="nav">
+	<a href="/">Heli.space</a>
+	»
+      </nav>
+      $:content
+    </div>
+  </body>
+</html>

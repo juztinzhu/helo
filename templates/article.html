@@ -1,0 +1,18 @@
+$def with (content)
+
+$var title: $content['title']
+
+<article>
+  <h1>$self.title</h1>
+  <div>
+    $:content['content']
+  </div>
+</article>
+
+<div>
+  <form action="/comment/$content['id']" method="post">
+    <input type="input" style="width:100%; height:200px;" name="comment"/>
+    <input type="input" style="width:100%;" name="email"/>
+    <input type="submit" value="Submit"/>
+  </form>
+</div>

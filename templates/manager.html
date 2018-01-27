@@ -1,0 +1,20 @@
+$def with (posts)
+$var title: Content Management
+
+<manage>
+  <a href="/manage/create">New article</a>
+<table>
+  $for post in posts:
+    $var id=$post['id']
+    <tr>
+      <td><a href="/view/$id">$post['title']</a></td>
+      <td>
+	<a href="/manage/edit/$id">Edit</a>
+	<a href="/manage/delete/$id">Delete</a>
+      </td>
+    </tr>
+</table>
+</manage>
+
+
+

@@ -1,0 +1,14 @@
+$def with (posts)
+
+$var title: Heli Space
+
+<a href="/manage">Content Management</a>
+<h1>Blogs</h1>
+
+<ul>
+$for post in posts:
+    $if 1 != post['hidden']:
+        <li>
+        <a href="/view/$post['id']">$post['title']</a>
+        </li>
+</ul>
