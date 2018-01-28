@@ -4,6 +4,8 @@ import json
 import re
 from datetime import datetime
 import random
+from functools import partial
+
 
 def no_comments(text):
     return re.sub(r'\/\*(.*)\*\/', '', text)
@@ -15,18 +17,28 @@ class FileMgr:
     result = {}
 
     def __init__(self):
+        self.conf = json.loads(
+            no_comments(
+                Path("./static/js/ueditor/php/config.json").read_text()))
         self.map = {'config': self.Config,
-                    'uploadimg': self.Upload,
+                    'uploadimg': partial(
+                        self.Upload,
+                        self.conf['imagePathFormat'],
+                        self.conf['imageMaxSize'],
+                        self.conf['imageAllowFiles']),
                     #    /* 上传涂鸦 */    case 'uploadscrawl':
                     #    /* 上传视频 */    case 'uploadvideo':
-                    #    /* 上传文件 */    case 'uploadfile':
+                    'uploadfile': partial(
+                        self.Upload,
+                        self.conf['filePathFormat'],
+                        self.conf['fileMaxSize'],
+                        self.conf['fileAllowFiles']),
                     #    /* 列出图片 */
                     'listimage': self.ListImg,
                     #    /* 列出文件 */
                     'listfile': self.ListFile,
                     #    /* 抓取远程文件 */    case 'catchimage':
                     }
-        self.conf = json.loads(no_comments(Path("./static/js/ueditor/php/config.json").read_text()))
 
     def getAct(self):
         print(web.input()['action'])
@@ -47,16 +59,19 @@ class FileMgr:
         # print('self.Config()')
         return Path("./static/js/ueditor/php/config.json").read_text()
 
-    def Upload(self):
+    def Upload(self, pathfmt, maxsize, allowExt):
         # upfile
         x = web.input()
         # print(x)
-        pathfmt = self.conf['imagePathFormat']
+        # pathfmt = self.conf['imagePathFormat']
         print(pathfmt)
         filename = x.name
         self.result['original'] = filename
         size = x.size
         print(size)
+        if int(size) > maxsize:
+            raise web.NotAcceptable
+        # todo: add ext check
         path = self.getFilePath(pathfmt, filename)
         print(path)
         self.saveFile(path, x.upfile)

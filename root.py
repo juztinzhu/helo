@@ -13,7 +13,8 @@ urls = (
     '/manage/hide/(\d+)', 'Hide',
     '/manage/show/(\d+)', 'Show',
     '/manage/edit/(\d+)', 'Edit',
-    '/fileop', 'fileMgr.FileMgr'
+    '/fileop', 'fileMgr.FileMgr',
+    '/app/WPExtract', 'WayPoint',
 )
 
 
@@ -105,6 +106,11 @@ class Show:
     def POST(self, id):
         show_post(id)
         raise web.seeother("/manage")
+
+
+class WayPoint:
+    def GET(self):
+        return render.waypoint()
 
 
 if __name__ == "__main__":

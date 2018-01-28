@@ -68,7 +68,7 @@
     /* 上传文件配置 */
     "fileActionName": "uploadfile", 
     "fileFieldName": "upfile", 
-    "filePathFormat": "/ueditor/php/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}",
+    "filePathFormat": "/ueditor/php/upload/file/{yyyy}{mm}{dd}/{filename}_{time}",
     "fileUrlPrefix": "", 
     "fileMaxSize": 51200000, 
     "fileAllowFiles": [
