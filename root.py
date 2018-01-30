@@ -1,6 +1,8 @@
 import web
 import pymysql
 import fileMgr
+import wayPoint
+
 
 render = web.template.render('templates/', base='layout',
                              globals={'hasattr': hasattr})
@@ -14,7 +16,8 @@ urls = (
     '/manage/show/(\d+)', 'Show',
     '/manage/edit/(\d+)', 'Edit',
     '/fileop', 'fileMgr.FileMgr',
-    '/app/WPExtract', 'WayPoint',
+    '/app/waypoint/(.*)', 'wayPoint.WayPoint',
+    '/waypoint', 'WayPoint'
 )
 
 
