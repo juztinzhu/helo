@@ -76,7 +76,7 @@ $(document).ready(
 
 		var point = new NamedGeoPoint(name, lon, lat);
 
-		console.log(name,lon,lat);
+		//console.log(name,lon,lat);
 		cords.push(point);
 	    }
 	    return cords;    
@@ -95,7 +95,13 @@ $(document).ready(
 	}
 
 	function genGPX(cords) {
-	    var xmlDoc = document.implementation.createDocument(null, "gpx");
+	    xmlDoc = document.implementation.createDocument(null, "gpx");
+
+	    var root = xmlDoc.children[0];
+	    root.setAttribute("creator", "Garmin Desktop App");
+	    root.setAttribute("version", "1.1");
+	    root.setAttribute("xmlns", "http://www.topografix.com/GPX/1/1");
+
 
 	    for ( var i in cords) {
 		var wpt = genwpt(xmlDoc, cords[i]);
@@ -116,7 +122,7 @@ $(document).ready(
 	    
 	    var name = xmlDoc.createElement('name');
 	    name.textContent = cord["name"];
-	    console.log(cord["name"]);
+	    //console.log(cord["name"]);
 	    wpt.appendChild(name);
 
 	    var sym = xmlDoc.createElement('sym');
